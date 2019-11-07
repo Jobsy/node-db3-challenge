@@ -5,7 +5,7 @@ const db = knex(knexConfig.development);
 
 module.exports = {
     find,
-    // findById,
+    findById,
     // insert,
     // update,
     // remove,
@@ -13,4 +13,8 @@ module.exports = {
 
  function find() {
     return db('schemes');
+  }
+
+  function findById(id) {
+    return db('schemes').where({id}).first();
   }
