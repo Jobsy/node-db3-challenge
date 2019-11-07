@@ -9,7 +9,7 @@ module.exports = {
     findSteps,
     add,
     update,
-    // remove,
+    remove,
   };
 
  function find() {
@@ -44,4 +44,10 @@ module.exports = {
     return db('schemes')
       .where({ id })
       .update(changes);
+  }
+
+  function remove(id) {
+    return db('schemes')
+      .where({id})
+      .del();
   }
