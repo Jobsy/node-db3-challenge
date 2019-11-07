@@ -11,50 +11,45 @@ module.exports = {
     addStep,
     update,
     remove,
-  };
+};
 
- function find() {
+function find() {
     return db('schemes');
-  }
+}
 
-  function findById(id) {
-    return db('schemes').where({id}).first();
-  }
+function findById(id) {
+    return db('schemes').where({ id }).first();
+}
 
-  function findSteps (id) {
-    // select schemes.id, schemes.scheme_name, steps.step_number, steps.instructions
-    // from schemes
-    // join steps on schemes.id = steps.step_number
-    // where schemes.id = 2
+function findSteps(id) {
     return db.select("schemes.id", "schemes.scheme_name", "steps.step_number", "steps.instructions")
-    .from("schemes")
-    .join("steps", "schemes.id", "=", "steps.step_number")
-    // .where(`schemes.id = ${id}`)
-    .where("schemes.id", "=", `${id}`)
-  }
+        .from("schemes")
+        .join("steps", "schemes.id", "=", "steps.step_number")
+        .where("schemes.id", "=", `${id}`)
+}
 
-  function add(schemes) {
+function add(schemes) {
     return db('schemes')
-      .insert(schemes)
-      .then(ids => {
-        return findById(ids[0]);
-      });
-  }
+        .insert(schemes)
+        .then(ids => {
+            return findById(ids[0]);
+        });
+}
 
-  function update(stepData, id) {
+function update(stepData, id) {
     return db('schemes')
-      .where({ id })
-      .update(stepData);
-  }
+        .where({ id })
+        .update(stepData);
+}
 
-  function addStep(changes, id) {
+function addStep(changes, id) {
     return db('schemes')
-      .where({ id })
-      .update(changes);
-  }
+        .where({ id })
+        .update(changes);
+}
 
-  function remove(id) {
+function remove(id) {
     return db('schemes')
-      .where({id})
-      .del();
-  }
+        .where({ id })
+        .del();
+}
