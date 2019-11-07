@@ -15,6 +15,6 @@ module.exports = {
     return db('schemes');
   }
 
-  function findById(id) {
+  function findById(id) { 
     return db('schemes').where({id}).first();
   }
